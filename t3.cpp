@@ -3,41 +3,25 @@
 
 using namespace std;
 
-int zeroCout = 0;
-
-long numReverser(long x){
-    if (x == 0) return 0;
-    long reverse = 0, count = 0 , temp;
-    long xTemp = x;
-    while(true){
-        xTemp /= 10;
-        if (xTemp == 0) break;
+long Reverse(long number){
+    long reversed = 0, copy = number;
+    int count = 0;
+    while (copy != 0) {
+        copy /= 10;
         count++;
     }
-    temp = count;
-    int sw = 0;
-    for (int i = 0; i <= count; ++i) {
-        if (sw == 0 && x % 10 == 0) zeroCout++;
-        else sw = 1;
-        reverse += x % 10 * pow(10, temp);
-        temp--;
-        x /= 10;
+    while (number != 0) {
+        if (number % 10 == 0 && reversed == 0) cout << 0;
+        else reversed += number % 10 * pow(10, count - 1);
+        count--;
+        number /= 10;
     }
-    return reverse;
+    return reversed;
 }
 
 int main(){
     long number;
     cin >> number;
-    long reversed = numReverser(number);
-    if (zeroCout == 0) {
-        cout << reversed;
-    }
-    else {
-        for (int i = 1; i <= zeroCout; ++i) {
-            cout<<"0";
-            if (i == zeroCout) cout<< reversed;
-        }
-    }
+    cout << Reverse(number);
     return 0;
 }
